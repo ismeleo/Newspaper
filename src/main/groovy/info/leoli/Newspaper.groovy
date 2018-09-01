@@ -1,4 +1,4 @@
-package info.leo
+package info.leoli
 
 import groovy.swing.SwingBuilder
 import org.joda.time.DateTime
