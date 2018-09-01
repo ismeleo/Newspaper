@@ -1,5 +1,6 @@
 plugins {
     id 'groovy'
+	id 'application'
 }
 
 group 'info.leoli'
@@ -7,6 +8,8 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+mainClassName = 'info.leoli.Newspaper'
 
 repositories {
     mavenCentral()
@@ -20,4 +23,13 @@ dependencies {
 
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
 	compile group: 'joda-time', name: 'joda-time', version: '2.10'
+}
+
+task uberjar(type: Jar) {
+	from files(sourceSets.main.output.classesDirs)
+	from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+
+	manifest {
+		attributes 'Main-Class': 'info.leoli.Newspaper'
+	}
 }
